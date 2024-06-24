@@ -55,7 +55,7 @@ public class ProductController {
 		Optional<ProductModel> product = productRepository.findById(id);
 		if (product.isEmpty())
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product not found.");
-
+		product.get().add(linkTo(methodOn(ProductController.class).getAllProduct()).withRel("Product List"));
 		return ResponseEntity.status(HttpStatus.OK).body(product.get());
 	}
 
